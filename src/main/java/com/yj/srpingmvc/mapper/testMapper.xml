@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.junit.test.dao.TestDao">
+
+ <select id="findAll" resultType="java.util.Map">
+    	SELECT SUM(L.INTEREST) INTEREST, decode(SUM(L.INTEREST),'0','',MAX('INTEREST')) INFEE_CODE, SUM(L.FINE_INTEREST) FINE_INTEREST,MAX('FINE_INTEREST') FINFEE_CODE 
+        FROM WRK_ACC_INFO L GROUP BY L.LOAN_NO
+ </select> 
+ 
+ 
+   <!--  <insert id="insert" parameterType="java.util.HashMap">
+        INSERT INTO TEST(ID_KEY,CODE,NAME)
+		VALUES(SYS_GUID(),#{code},#{name})
+    </insert>
+   <insert id="insertList" parameterType="java.util.List"  useGeneratedKeys="false">
+      insert into TEST(ID_KEY,CODE,NAME)
+        SELECT  *
+		FROM(
+		<foreach collection="list" item="item" index="index" separator="UNION ALL">
+		 	SELECT 
+		        SYS_GUID() idkey,
+		       #{item.code,jdbcType=VARCHAR} code,
+		       #{item.name,jdbcType=VARCHAR} name
+		     FROM dual
+		</foreach>
+		   )A
+		insert all
+        <foreach collection="list" item="item" >
+        	into TEST(ID_KEY,CODE,NAME) 
+        		values(SYS_GUID(),
+	        	<foreach collection="item.values"  item="value" separator=",">  
+	            	 #{value}
+	         	</foreach>
+	         	)
+        </foreach>
+        select 1 from dual
+   </insert>
+    <select id="findById" resultType="java.util.Map" parameterType="java.lang.String">
+    	select * from TEST WHERE 1=1
+    	<if test="null != id and '' != id">
+    	  and ID_KEY = #{id}
+    	</if>
+    </select>
+    
+     <select id="findAll" resultType="java.util.Map">
+    	select * from TEST WHERE 1=1
+    </select> -->
+</mapper>
